@@ -444,6 +444,8 @@ services:
         - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
       ports:
         - "${MYSQL_PORT}:3306"
+      command: 
+        --innodb_use_native_aio=0 
       networks:
         - backend
 
@@ -771,6 +773,7 @@ services:
       build: ./phpmyadmin
       environment:
         - PMA_ARBITRARY=1
+        - PMA_HOST=mysql
         - MYSQL_USER=${PMA_USER}
         - MYSQL_PASSWORD=${PMA_PASSWORD}
         - MYSQL_ROOT_PASSWORD=${PMA_ROOT_PASSWORD}
